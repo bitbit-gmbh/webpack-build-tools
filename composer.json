@@ -1,0 +1,38 @@
+{
+  "name": "web-dev-media/weback-build-tools",
+  "type": "project",
+  "license": "GPLv3",
+  "description": "Setup & config stack for webpack build",
+  "homepage": "https://www.web-dev-media.de/",
+  "authors": [
+    {
+      "name": "Rene Reimann",
+      "email": "r.reimann@web-dev-media.de",
+      "homepage": "http://rene-reimann.de"
+    },
+    {
+      "name": "Sven Balzer",
+      "email": "s.balzer@web-dev-media.de",
+      "homepage": "http://web-dev-media.de"
+    }
+  ],
+  "keywords": [
+    "webpack",
+    "wp",
+    "multisite",
+    "network"
+  ],
+  "support": {
+    "issues": ""
+  },
+  "require": {},
+  "require-dev": {},
+  "scripts": {
+    "config-phpcs": [
+      "vendor/bin/phpcs --config-set installed_paths ../../wp-coding-standards/wpcs"
+    ],
+    "test": [
+      "vendor/bin/phpcs --ignore=public/core/,vendor/ -n -s ."
+    ]
+  }
+}
