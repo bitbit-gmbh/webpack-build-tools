@@ -4,6 +4,8 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BuildController = require('../controller');
 const ExecGitCommands = require('../plugins/execGitCommands');
 const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
+const FileManagerPlugin = require('filemanager-webpack-plugin');
+const packageBuildConfig = require('./webpack/package.config');
 const log = require('signale');
 const path = require('path');
 const fs = require('fs');
@@ -11,6 +13,7 @@ const argv = require('yargs').argv;
 
 const asyncWebpackConfig = async () => {
 	const DEV_MODE = argv.mode !== 'production';
+	const PLUGIN_NAME = path.basename(path.resolve('./'));
 
 	const version = await BuildController.versionHash( {
 		versionTag: argv.tag || null,
@@ -138,7 +141,8 @@ const asyncWebpackConfig = async () => {
 				filesToRemove: [
 					version.currentDistPath
 				]
-			})
+			}),
+            new FileManagerPlugin(packageBuildConfig(version, DEV_MODE, PLUGIN_NAME)),
 		]
 	}
 }
