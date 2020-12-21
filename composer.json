@@ -1,5 +1,5 @@
 {
-  "name": "w/w",
+  "name": "web-dev-media/webpack-build-tools",
   "type": "project",
   "license": "GPLv3",
   "description": "Setup & config stack for webpack build",
