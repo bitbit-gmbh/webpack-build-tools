@@ -1,14 +1,14 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
-const BuildController = require('../controller');
-const ExecGitCommands = require('../plugins/execGitCommands');
+const ExtraWatchWebpackPlugin  = require( 'extra-watch-webpack-plugin' );
+const BuildController = require('./vendor/web-dev-media/webpack-build-tools/controller');
+const ExecGitCommands = require('./vendor/web-dev-media/webpack-build-tools/plugins/execGitCommands');
 const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
 const FileManagerPlugin = require('filemanager-webpack-plugin');
-const packageBuildConfig = require('./webpack/package.config');
+const packageBuildConfig = require('./package.config');
 const log = require('signale');
 const path = require('path');
-const fs = require('fs');
 const argv = require('yargs').argv;
 
 const asyncWebpackConfig = async () => {
@@ -17,7 +17,7 @@ const asyncWebpackConfig = async () => {
 
 	const version = await BuildController.versionHash( {
 		versionTag: argv.tag || null,
-		distPath: "./dist/"
+		distPath: "./assets/dist/"
 	} );
 
 	log.info( 'Plugin build started - version: ' + version.current );
@@ -26,22 +26,14 @@ const asyncWebpackConfig = async () => {
 		version: version
 	});
 
-	const bundlePattern = {
-		'opm': {
-			'slider': './src/index.js',
-			'frontend': './src/webpack.import.js'
-		}
-	};
-
-	const WP_CONTENT_DIR = '/app/plugins/';
+	const WP_CONTENT_DIR = '/wp-content/plugins/';
 	const CURRENT_DIST_PATH = version.currentDistPath;
 	const CURRENT_PUBLIC_PATH = WP_CONTENT_DIR + path.basename(__dirname) + version.currentDistPath.replace('./', '/');
 
 	return {
 		mode: 'development',
 		entry: {
-			'immoticket-opm-siwper': [ './src/webpack.import.js'],
-			'immoticket-opm-siwper-block': [ './src/index.js'],
+			'allergieausweis-api-request': [ './assets/webpack.import.js']
 		},
 		output: {
 			path: path.resolve(__dirname, CURRENT_DIST_PATH),
@@ -128,21 +120,27 @@ const asyncWebpackConfig = async () => {
 				filename: DEV_MODE ? '[name].css' : '[name].css',
 				chunkFilename: DEV_MODE ? '[name].css' : '[name].css'
 			}),
-			new DependencyExtractionWebpackPlugin( { injectPolyfill: true, version: version.current } ),
+			new DependencyExtractionWebpackPlugin( {
+				injectPolyfill: true,
+				version: version.current
+			}),
 			new ExecGitCommands({
 				version: version,
 				devMode: DEV_MODE,
 				filesToCommit: [
 					'package.json',
 					'index.php',
-					'dist/.version',
-					version.currentDistPath
+					'assets/dist/.version',
+					version.currentDistPath.replace('./', '')
 				],
 				filesToRemove: [
 					version.currentDistPath
 				]
 			}),
-            new FileManagerPlugin(packageBuildConfig(version, DEV_MODE, PLUGIN_NAME)),
+			new FileManagerPlugin(packageBuildConfig(version, DEV_MODE, PLUGIN_NAME)),
+			new ExtraWatchWebpackPlugin({
+				files: [ 'inc/**/*.php', 'inc/**/*.json' ],
+			}),
 		]
 	}
 }
