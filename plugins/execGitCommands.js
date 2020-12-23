@@ -33,8 +33,6 @@ class ExecGitCommands {
 				const gitCommit = 'git commit ' + this.lastDistPath + ' -m "remove version: ' + this.lastDistPath + '"';
 				execSync( gitCommit, { stdio: [ 0, 1, 2 ] } );
 			}
-
-			BuildController.deleteLastBuildFolder(this.lastDistPath)
 		});
 
 		compiler.hooks.done.tap('Execute add current dist git command', (
