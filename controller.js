@@ -45,6 +45,8 @@ const Controller = {
 
 		await Controller.writeWordPressPluginVersion( _options.version.current );
 		await writePackageVersion( _options.version.current );
+
+		await Controller.deleteLastBuildFolder(_options.version.lastDistPath)
 	},
 
 	/**
