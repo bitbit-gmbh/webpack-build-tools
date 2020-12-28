@@ -25,6 +25,10 @@ class ExecGitCommands {
 		compiler.hooks.environment.tap('Execute add current dist git command', (
 		  stats /* stats is passed as an argument when done hook is tapped.  */
 		) => {
+			if(!fs.existsSync(this.lastDistPath)){
+				return;
+			}
+		
 			const execSync = require('child_process').execSync;
 			log.info('run git command: git remove ' + this.lastDistPath);
 			execSync('git rm -r -f ' + this.lastDistPath, { stdio:[0, 1, 2] });
