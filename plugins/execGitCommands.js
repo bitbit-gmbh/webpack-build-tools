@@ -18,6 +18,12 @@ class ExecGitCommands {
 	}
 
 	apply(compiler) {
+		if(!fs.exists(this.currentDistPath, exists => {
+			return exists;
+		})){
+			return;
+		}
+	
 		if(!this.filesToCommit || !this.filesToRemove || !this.version || (this.lastDistPath === this.currentDistPath)){
 			return;
 		}
