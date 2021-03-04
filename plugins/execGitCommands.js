@@ -5,7 +5,7 @@ const BuildController = require('../controller');
 
 class ExecGitCommands {
 	constructor(options) {
-		if(!options.filesToCommit || !options.filesToRemove || !options.version || options.devMode){
+		if(!options.filesToCommit || !options.filesToRemove || !options.version || options.devMode === 'development'){
 			return;
 		}
 
