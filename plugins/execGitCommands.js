@@ -12,7 +12,12 @@ class ExecGitCommands {
 		this.filesToCommit = options.filesToCommit.join(' ');
 		this.filesToRemove = options.filesToRemove.join(' ');
 
-		this.version = options.version;
+		this.version = options.version || null;
+		       
+        if(!this.version){
+            return null;
+        }
+		
 		this.lastDistPath = this.version.lastDistPath.replace('./', '');
 		this.currentDistPath = this.version.currentDistPath.replace('./', '');
 	}
@@ -24,7 +29,7 @@ class ExecGitCommands {
 			return;
 		}
 	
-		if(!this.filesToCommit || !this.filesToRemove || !this.version || (this.lastDistPath === this.currentDistPath)){
+		if(!this.filesToCommit || !this.filesToRemove || !this.version || (this.lastDistPath === this.currentDistPath) || !fs.existsSync(this.lastDistPath)){
 			return;
 		}
 
