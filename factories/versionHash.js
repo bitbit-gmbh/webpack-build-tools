@@ -7,16 +7,18 @@ const path = require('path');
  * @namespace VersionHashFactory
  */
 class VersionHashFactory {
-	config = {
-		distPath: __dirname,
-		dotVersionFilename: null,
-		dotVersionFilePath: __dirname
-	};
+	constructor(){
+    	this.config = {
+    		distPath: __dirname,
+    		dotVersionFilename: null,
+    		dotVersionFilePath: __dirname
+    	};
 
-	hash = {
-		current: null,
-		last: null
-	};
+    	this.hash = {
+    		current: null,
+    		last: null
+    	};
+    }
 
 	/**
 	 * Getter for last version hash
