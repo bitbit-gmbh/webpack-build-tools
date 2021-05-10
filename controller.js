@@ -21,7 +21,8 @@ const Controller = {
 		config = config || {};
 		return VersionHash( {
 			distPath: config.distPath ||  './assets/dist/',
-			versionTag: config.versionTag
+			versionTag: config.versionTag,
+			dotVersionFilename: config.dotVersionFilename,
 		} );
 	},
 
