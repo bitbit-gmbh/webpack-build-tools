@@ -120,7 +120,7 @@ class VersionHashFactory {
 	 * @param {string} dotVersionFilename
 	 */
 	set dotVersionFilename(dotVersionFilename) {
-		this.config.dotVersionFilename = '.' + dotVersionFilename;
+		this.config.dotVersionFilename = dotVersionFilename;
 	};
 
 	/**
@@ -147,7 +147,7 @@ module.exports = async (config) => {
 
 	version.distPath = config.distPath ? config.distPath : __dirname;
 	version.current = config.versionTag || createHash( Date.now() ).substring( 0, 12 );
-	version.dotVersionFilename = config.dotVersionFilename ? config.dotVersionFilename : 'version';
+	version.dotVersionFilename = config.dotVersionFilename ? config.dotVersionFilename : '.version';
 	version.dotVersionFilePath = config.dotVersionFilePath ? config.dotVersionFilePath : config.distPath;
 
 	await version.setLastHash();
