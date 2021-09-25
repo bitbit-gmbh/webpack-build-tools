@@ -44,10 +44,8 @@ const Controller = {
 
 		let distPath = _options.version.distPath + _options.version.last;
 
-		if(_options.version.current .indexOf('v') === 0) {
-			await Controller.writeWordPressPluginVersion( _options.version.current );
-			await writePackageVersion( _options.version.current );
-		}
+		await Controller.writeWordPressPluginVersion( _options.version.current );
+		await writePackageVersion( _options.version.current );
 
 		await Controller.deleteLastBuildFolder(_options.version.lastDistPath)
 	},
