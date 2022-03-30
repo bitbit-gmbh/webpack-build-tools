@@ -1,5 +1,5 @@
 {
-  "name": "webpack-enhanced-build",
+  "name": "@web-dev-media/webpack-enhanced-build",
   "version": "1.0.0",
   "description": "Enhanced webpack build progress, including production package build, git command execution and more",
   "main": "controller.js",
@@ -14,7 +14,23 @@
     "webpack",
     "build"
   ],
-  "author": "Web Dev Media UG -> rene.reimann",
+  "author": {
+      "name": "Web Dev Media UG",
+      "email": "info@web-dev-media.de",
+      "url": "https://web-dev-media.de"
+    },
+    "contributors": [
+      {
+        "name": "René Reimann",
+        "email": "info@rene-reimann.de",
+        "url": "http://www.rene-reimann.de"
+      },
+      {
+        "name": "Sven Balzer",
+        "email": "s.balzer@web-dev-media.de",
+        "url": "https://web-dev-media.de"
+      }
+    ],
   "license": "ISC",
   "bugs": {
     "url": "https://bitbucket.org/webdevmedia/webpack-build-tools/issues"
