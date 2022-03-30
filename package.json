@@ -1,0 +1,23 @@
+{
+  "name": "webpack-enhanced-build",
+  "version": "1.0.0",
+  "description": "Enhanced webpack build progress, including production package build, git command execution and more",
+  "main": "controller.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/webdevmedia/webpack-build-tools.git"
+  },
+  "keywords": [
+    "webpack",
+    "build"
+  ],
+  "author": "Web Dev Media UG -> rene.reimann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/webdevmedia/webpack-build-tools/issues"
+  },
+  "homepage": "https://bitbucket.org/webdevmedia/webpack-build-tools#readme"
+}
